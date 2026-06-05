@@ -1,0 +1,140 @@
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f5f1eb;
+}
+
+.desktop-preview {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f5f1eb;
+}
+
+.mobile-shell {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: #fbf8f2;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 40px rgba(33, 49, 63, 0.08);
+}
+
+@media (max-width: 430px) {
+  .desktop-preview {
+    display: block;
+    background: #fbf8f2;
+  }
+
+  .mobile-shell {
+    max-width: none;
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f5f1eb;
+}
+
+.desktop-preview {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f5f1eb;
+}
+
+.mobile-shell {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: #fbf8f2;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 40px rgba(33, 49, 63, 0.08);
+}
+
+@media (min-width: 431px) {
+  .mobile-shell {
+    width: 430px;
+  }
+}
+
+@media (max-width: 430px) {
+  .desktop-preview {
+    display: block;
+    background: #fbf8f2;
+  }
+
+  .mobile-shell {
+    width: 100%;
+    max-width: none;
+    box-shadow: none;
+  }
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f5f1eb;
+}
+
+.desktop-preview {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f5f1eb;
+}
+
+.mobile-shell {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: #fbf8f2;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 40px rgba(33, 49, 63, 0.08);
+}
+
+@media (min-width: 431px) {
+  .mobile-shell {
+    width: 430px;
+  }
+}
+
+@media (max-width: 430px) {
+  .desktop-preview {
+    display: block;
+    background: #fbf8f2;
+  }
+
+  .mobile-shell {
+    width: 100%;
+    max-width: none;
+    box-shadow: none;
+  }
+}
