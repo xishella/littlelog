@@ -1,61 +1,60 @@
-**Add your own guidelines here**
-<!--
+# LittleLog design system
 
-System Guidelines
+Guidelines for building LittleLog screens so they stay consistent with the Claude Design source. The tone is warm, calm, and editorial — soft cream surfaces, organic "blob" shapes, and a serif display face.
 
-Use this file to provide the AI with rules and guidelines you want it to follow.
-This template outlines a few examples of things you can add. You can add your own sections and format it to suit your needs
+## General
 
-TIP: More context isn't always better. It can confuse the LLM. Try and add the most important rules you need
+- Reproduce the design prototype faithfully. Match the visual output (spacing, radii, colors, type) rather than inventing new patterns.
+- Style with inline styles + the CSS variables in [src/styles/globals.css](../src/styles/globals.css). Do **not** add Tailwind utilities or a component library.
+- Keep files small: one screen per file in `src/app/screens/`, shared primitives in `src/app/components/`.
+- Each screen is a full-height flex column: a fixed header, a scrolling middle (`className="ll-scroll"`), and — where applicable — a fixed footer / bottom nav.
+- Sample content is fixed: baby is **Max**, primary caregiver is **Anna**. Dates read like **Friday, June 5** (long) or **Jun 5** (compact).
 
-# General guidelines
+## Color tokens
 
-Any general rules you want the AI to follow.
-For example:
+Defined as CSS variables in `globals.css`:
 
-* Only use absolute positioning when necessary. Opt for responsive and well structured layouts that use flexbox and grid by default
-* Refactor code as you go to keep code clean
-* Keep file sizes small and put helper functions and components in their own files.
+| Token | Value | Use |
+| --- | --- | --- |
+| `--ll-bg` | `#FAF6F0` | App background |
+| `--ll-card` | `#FFFCF7` | Cards, headers, footers |
+| `--ll-ink` | `#23303B` | Serif headings |
+| `--ll-ink-2` | `#2C2C2E` | Strong UI text |
+| `--ll-muted` / `-2` / `-3` / `-4` | `#6B6357` / `#8A8276` / `#9A938A` / `#A39A8C` | Secondary text, descending emphasis |
+| `--ll-blue` | `#2D5F7B` | Primary actions, active nav, accents |
+| `--ll-peach` | `#FBCC9B` | Caregiver avatar / warm accent |
+| `--ll-hairline` | `rgba(44,44,46,.06)` | Borders and dividers |
 
---------------
+Per-log-type colors (card blob + detail header + selected chip accent) live in `CATS` / `CFG` in [src/app/data/mock.ts](../src/app/data/mock.ts) — never hardcode them in a screen.
 
-# Design system guidelines
-Rules for how the AI should make generations look like your company's design system
+## Typography
 
-Additionally, if you select a design system to use in the prompt box, you can reference
-your design system's components, tokens, variables and components.
-For example:
+Three families, set via `--serif`, `--ui`, `--body`:
 
-* Use a base font-size of 14px
-* Date formats should always be in the format “Jun 10”
-* The bottom toolbar should only ever have a maximum of 4 items
-* Never use the floating action button with the bottom toolbar
-* Chips should always come in sets of 3 or more
-* Don't use a dropdown if there are 2 or fewer options
+- **Cormorant** (`--serif`) — display headings and big numbers. Often italic for warm asides ("A softer way to hand off the day").
+- **Outfit** (`--ui`) — UI labels, buttons, nav, stat captions. Uppercase section labels use `font-size: 10.5–11px`, `letter-spacing: .08–.1em`.
+- **Nunito** (`--body`) — paragraph/body copy and form fields.
 
-You can also create sub sections and add more specific details
-For example:
+## Shape language
 
+- **Blobs**: organic `border-radius` like `60% 40% 55% 45%/52% 60% 40% 48%` for avatars, stat tiles, and log-card thumbnails.
+- **Cards**: `border-radius: 20–24px`, `background: var(--ll-card)`, `1px solid rgba(44,44,46,.05)`.
+- **Pills/chips**: `border-radius: 16–18px`. Buttons and sheets use `24–30px`.
+- Decorative background blobs use very low-contrast tints and sit behind content (`z-index` 0 / 1).
 
-## Button
-The Button component is a fundamental interactive element in our design system, designed to trigger actions or navigate
-users through the application. It provides visual feedback and clear affordances to enhance user experience.
+## Components & patterns
 
-### Usage
-Buttons should be used for important actions that users need to take, such as form submissions, confirming choices,
-or initiating processes. They communicate interactivity and should have clear, action-oriented labels.
+- **StatusBar** — the 9:41 + signal/wifi/battery row. Use at the top of screens that don't have a card header.
+- **BottomNav** — exactly four tabs: Home, Log, Handoff, Profile. Active tab is `--ll-blue` with a slightly heavier icon stroke; never exceed four items.
+- **Primary button** — filled `--ll-blue`, white text, `border-radius: 28–30px`, soft shadow `0 10px 24px rgba(45,95,123,.26)`. One primary action per view.
+- **Secondary button** — `--ll-card` fill, `1px solid rgba(44,44,46,.14)` border, ink text.
+- **Toggle** — the shared `Toggle` component (on = `--ll-blue`). Use for all settings switches.
+- **Back control** — a 40px circular button with a chevron-left, in `#F1ECE4` (light headers) or `rgba(255,255,255,.55)` (tinted headers).
+- **Modals/sheets** — center dialogs for confirmations; bottom sheets (rounded top corners, drag handle) for share/customize. Render them globally from `Layout` via `AppState` flags, not inline in a screen.
 
-### Variants
-* Primary Button
-  * Purpose : Used for the main action in a section or page
-  * Visual Style : Bold, filled with the primary brand color
-  * Usage : One primary button per section to guide users toward the most important action
-* Secondary Button
-  * Purpose : Used for alternative or supporting actions
-  * Visual Style : Outlined with the primary color, transparent background
-  * Usage : Can appear alongside a primary button for less important actions
-* Tertiary Button
-  * Purpose : Used for the least important actions
-  * Visual Style : Text-only with no border, using primary color
-  * Usage : For actions that should be available but not emphasized
--->
+## Adding a new log type
+
+1. Add a `CATS` entry (label, sample sub-line, blob `bg` + `radius`).
+2. Add a `CFG[type]` entry (title, save label, header `bg`, chip `accent`, time mode, field flags, option groups).
+3. Add the type to `DEFAULT_VISIBLE` if it should show on the Log hub by default.
+4. No new screen file is needed — `/log/:type` renders it from `CFG`.

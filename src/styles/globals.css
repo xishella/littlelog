@@ -1,140 +1,107 @@
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap");
+
+:root {
+  --ll-bg: #faf6f0;
+  --ll-card: #fffcf7;
+  --ll-ink: #23303b;
+  --ll-ink-2: #2c2c2e;
+  --ll-muted: #6b6357;
+  --ll-muted-2: #8a8276;
+  --ll-muted-3: #9a938a;
+  --ll-muted-4: #a39a8c;
+  --ll-blue: #2d5f7b;
+  --ll-peach: #fbcc9b;
+  --ll-hairline: rgba(44, 44, 46, 0.06);
+  --serif: "Cormorant", serif;
+  --ui: "Outfit", sans-serif;
+  --body: "Nunito", sans-serif;
 }
 
-body {
-  background: #f5f1eb;
-}
-
-.desktop-preview {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background: #f5f1eb;
-}
-
-.mobile-shell {
-  width: 100%;
-  max-width: 430px;
-  min-height: 100vh;
-  background: #fbf8f2;
-  position: relative;
-  overflow-x: hidden;
-  box-shadow: 0 0 40px rgba(33, 49, 63, 0.08);
-}
-
-@media (max-width: 430px) {
-  .desktop-preview {
-    display: block;
-    background: #fbf8f2;
-  }
-
-  .mobile-shell {
-    max-width: none;
-    width: 100%;
-    box-shadow: none;
-  }
+* {
+  box-sizing: border-box;
 }
 
 html,
 body,
 #root {
-  width: 100%;
-  min-height: 100%;
+  height: 100%;
   margin: 0;
 }
 
 body {
-  background: #f5f1eb;
+  font-family: var(--body);
 }
 
+@keyframes llfloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* Desktop preview: center the phone frame on a warm backdrop */
 .desktop-preview {
   min-height: 100vh;
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  background: #f5f1eb;
+  background: #ece7df;
+  padding: 40px 0;
+  font-family: var(--body);
 }
 
 .mobile-shell {
-  width: 100%;
-  max-width: 430px;
-  min-height: 100vh;
-  background: #fbf8f2;
+  width: 390px;
+  height: 844px;
+  border-radius: 48px;
+  overflow: hidden;
+  background: var(--ll-bg);
+  box-shadow: 0 24px 64px rgba(33, 49, 63, 0.22);
   position: relative;
-  overflow-x: hidden;
-  box-shadow: 0 0 40px rgba(33, 49, 63, 0.08);
-}
-
-@media (min-width: 431px) {
-  .mobile-shell {
-    width: 430px;
-  }
-}
-
-@media (max-width: 430px) {
-  .desktop-preview {
-    display: block;
-    background: #fbf8f2;
-  }
-
-  .mobile-shell {
-    width: 100%;
-    max-width: none;
-    box-shadow: none;
-  }
-}
-
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-}
-
-body {
-  background: #f5f1eb;
-}
-
-.desktop-preview {
-  min-height: 100vh;
-  width: 100%;
   display: flex;
-  justify-content: center;
-  background: #f5f1eb;
 }
 
-.mobile-shell {
-  width: 100%;
-  max-width: 430px;
-  min-height: 100vh;
-  background: #fbf8f2;
-  position: relative;
-  overflow-x: hidden;
-  box-shadow: 0 0 40px rgba(33, 49, 63, 0.08);
-}
-
-@media (min-width: 431px) {
-  .mobile-shell {
-    width: 430px;
-  }
-}
-
-@media (max-width: 430px) {
+/* On small screens, let the app fill the viewport (no phone chrome) */
+@media (max-width: 440px) {
   .desktop-preview {
     display: block;
-    background: #fbf8f2;
+    padding: 0;
+    background: var(--ll-bg);
   }
-
   .mobile-shell {
     width: 100%;
-    max-width: none;
+    height: 100dvh;
+    border-radius: 0;
     box-shadow: none;
   }
+}
+
+.ll-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--ll-bg);
+}
+
+.ll-scroll {
+  overflow-y: auto;
+  min-height: 0;
+}
+.ll-scroll::-webkit-scrollbar {
+  width: 0;
+}
+
+button {
+  font-family: var(--ui);
+}
+
+input,
+textarea,
+select {
+  font-family: var(--body);
 }

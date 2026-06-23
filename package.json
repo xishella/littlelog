@@ -78,5 +78,5 @@
       "vite": "6.3.5"
     }
   },
-  "description": "LittleLog baby care handoff MVP built with React, Vite, Tailwind, and Figma-exported screens."
+  "description": "LittleLog baby care handoff prototype — React + Vite, hand-coded from the Claude Design redesign."
 }

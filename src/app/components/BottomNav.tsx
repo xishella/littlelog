@@ -1,41 +1,54 @@
 import { useNavigate } from "react-router";
-import { Home, Plus, FileText, User } from "lucide-react";
+import { HomeIcon, LogIcon, HandoffIcon, ProfileIcon } from "./icons";
 
-interface BottomNavProps {
-  currentRoute: string;
-}
+type Tab = "home" | "log" | "handoff" | "profile";
 
-export function BottomNav({ currentRoute }: BottomNavProps) {
+const ACTIVE = "#2D5F7B";
+const IDLE = "#A39A8C";
+
+const items: { tab: Tab; to: string; label: string; Icon: typeof HomeIcon }[] = [
+  { tab: "home", to: "/home", label: "Home", Icon: HomeIcon },
+  { tab: "log", to: "/log", label: "Log", Icon: LogIcon },
+  { tab: "handoff", to: "/handoff", label: "Handoff", Icon: HandoffIcon },
+  { tab: "profile", to: "/profile", label: "Profile", Icon: ProfileIcon },
+];
+
+export function BottomNav({ active }: { active: Tab }) {
   const navigate = useNavigate();
-
-  const navItems = [
-    { path: "/dashboard", label: "Home", icon: Home },
-    { path: "/log", label: "Log", icon: Plus },
-    { path: "/handoff-ready", label: "Handoff", icon: FileText },
-    { path: "/profile", label: "Profile", icon: User },
-  ];
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border px-6 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))]">
-      <div className="flex justify-around items-center max-w-md mx-auto">
-        {navItems.map((item) => {
-          const isActive = currentRoute === item.path;
-          return (
-            <button
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-colors ${
-                isActive ? "text-primary" : "text-muted-foreground"
-              }`}
-            >
-              <item.icon className="w-5 h-5" />
-              <span className="text-xs font-medium" style={{ fontFamily: 'var(--font-heading)' }}>
-                {item.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+    <div
+      style={{
+        flex: "none",
+        background: "#FFFCF7",
+        borderTop: "1px solid var(--ll-hairline)",
+        display: "flex",
+        justifyContent: "space-around",
+        padding: "11px 18px 26px",
+      }}
+    >
+      {items.map(({ tab, to, label, Icon }) => {
+        const on = tab === active;
+        return (
+          <button
+            key={tab}
+            onClick={() => navigate(to)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 4,
+              padding: "4px 8px",
+              color: on ? ACTIVE : IDLE,
+            }}
+          >
+            <Icon color="currentColor" strokeWidth={on ? 1.9 : 1.7} />
+            <span style={{ fontFamily: "var(--ui)", fontSize: 11, fontWeight: on ? 600 : 500 }}>{label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }

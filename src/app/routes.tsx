@@ -1,109 +1,38 @@
-import { createBrowserRouter, Outlet } from "react-router";
-import { WelcomeScreen } from "./screens/WelcomeScreen";
-import { TodayDashboard } from "./screens/TodayDashboard";
-import { QuickLogScreen } from "./screens/QuickLogScreen";
+import { createBrowserRouter } from "react-router";
+import { Layout } from "./components/Layout";
+import { SplashScreen } from "./screens/SplashScreen";
+import { HomeScreen } from "./screens/HomeScreen";
+import { LogScreen } from "./screens/LogScreen";
 import { LogDetailScreen } from "./screens/LogDetailScreen";
-import { HandoffReadinessScreen } from "./screens/HandoffReadinessScreen";
-import { HandoffSummaryScreen } from "./screens/HandoffSummaryScreen";
+import { HandoffScreen } from "./screens/HandoffScreen";
+import { PreviewScreen } from "./screens/PreviewScreen";
+import { EditNoteScreen } from "./screens/EditNoteScreen";
 import { ProfileScreen } from "./screens/ProfileScreen";
+import { ChildInfoScreen } from "./screens/ChildInfoScreen";
+import { EditProfileScreen } from "./screens/EditProfileScreen";
+import { NotificationsScreen } from "./screens/NotificationsScreen";
+import { PrivacyScreen } from "./screens/PrivacyScreen";
 import { NotFoundScreen } from "./screens/NotFoundScreen";
-import { HandoffNoteScreen } from "./screens/HandoffNoteScreen";
-import { ImportantUpdateScreen } from "./screens/ImportantUpdateScreen";
-import { EditSummaryScreen } from "./screens/EditSummaryScreen";
-import { LogSleepScreen } from "./screens/LogSleepScreen";
-import { LogNursingScreen } from "./screens/LogNursingScreen";
-import { LogDiaperScreen } from "./screens/LogDiaperScreen";
-import { LogSolidScreen } from "./screens/LogSolidScreen";
-import { LogMedicineScreen } from "./screens/LogMedicineScreen";
-import { LogMoodScreen } from "./screens/LogMoodScreen";
-import { AddPhotoScreen } from "./screens/AddPhotoScreen";
-
-function Root() {
-  return <Outlet />;
-}
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: Root,
+    Component: Layout,
     ErrorBoundary: NotFoundScreen,
     children: [
-      {
-        index: true,
-        Component: WelcomeScreen,
-      },
-      {
-        path: "dashboard",
-        Component: TodayDashboard,
-      },
-      {
-        path: "log",
-        Component: QuickLogScreen,
-      },
-      {
-        path: "log/sleep",
-        Component: LogSleepScreen,
-      },
-      {
-        path: "log/bottle",
-        Component: LogDetailScreen,
-      },
-      {
-        path: "log/nursing",
-        Component: LogNursingScreen,
-      },
-      {
-        path: "log/diaper",
-        Component: LogDiaperScreen,
-      },
-      {
-        path: "log/solid",
-        Component: LogSolidScreen,
-      },
-      {
-        path: "log/medicine",
-        Component: LogMedicineScreen,
-      },
-      {
-        path: "log/mood",
-        Component: LogMoodScreen,
-      },
-      {
-        path: "log/note",
-        Component: HandoffNoteScreen,
-      },
-      {
-        path: "log/photo",
-        Component: AddPhotoScreen,
-      },
-      {
-        path: "handoff-ready",
-        Component: HandoffReadinessScreen,
-      },
-      {
-        path: "handoff-summary",
-        Component: HandoffSummaryScreen,
-      },
-      {
-        path: "profile",
-        Component: ProfileScreen,
-      },
-      {
-        path: "handoff-note",
-        Component: HandoffNoteScreen,
-      },
-      {
-        path: "important-update",
-        Component: ImportantUpdateScreen,
-      },
-      {
-        path: "edit-summary",
-        Component: EditSummaryScreen,
-      },
-      {
-        path: "*",
-        Component: NotFoundScreen,
-      },
+      { index: true, Component: SplashScreen },
+      { path: "home", Component: HomeScreen },
+      { path: "log", Component: LogScreen },
+      { path: "log/:type", Component: LogDetailScreen },
+      { path: "handoff", Component: HandoffScreen },
+      { path: "preview", Component: PreviewScreen },
+      { path: "edit-note", Component: EditNoteScreen },
+      { path: "profile", Component: ProfileScreen },
+      { path: "child-info", Component: ChildInfoScreen },
+      { path: "edit-profile", Component: EditProfileScreen },
+      { path: "notifications", Component: NotificationsScreen },
+      { path: "privacy", Component: PrivacyScreen },
+      { path: "*", Component: NotFoundScreen },
     ],
   },
 ]);
